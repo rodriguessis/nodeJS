@@ -1,17 +1,26 @@
+const query = require('../repository/queryAtendimentos')
+
 class Atendimento {
 
-    adiciona(atendimento, res) {
-        console.log('Salvar objeto') 
-        console.log(atendimento)
-        res.status(200).json(atendimento)
+    adiciona(atendimento) {
+
+        // validar dados
+
+        return query.adiciona(atendimento)
+            .then( atendimento => { return atendimento} ) 
+
+      //  
     }
 
-    lista(res) {
-        res.status(200).json('[{"id" : 100, "descricao" : "revisão básica", "status" : "Agendado"},{"id" : 200, "descricao" : "Limpeza Ar Condicionado", "status" : "Concluido"}]')
+    lista() {
+
+        return query.lista()
+            .then( lista => { return lista })
     }
 
-    buscarPorId( id, res ) {
-        res.status(200).json({"id" : 100, "descricao" : "revisão básica", "status" : "Agendado"})
+    buscarPorId( id ) {
+        return query.por(id)
+        .then( atendimento => { return atendimento } )
     }
 
 }
